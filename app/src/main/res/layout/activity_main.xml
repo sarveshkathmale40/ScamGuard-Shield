@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="20dp"
+    android:background="#121212">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="🛡️ ScamGuard Shield"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textColor="#00FF66"
+        android:layout_gravity="center"
+        android:layout_marginBottom="16dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="बॅकग्राउंड प्रोटेक्शन: सक्रिय (Active)"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        android:layout_marginBottom="20dp"/>
+
+    <Button
+        android:id="@+id/btnPermissions"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="🛡️ सर्व सिक्युरिटी परवानग्या ॲक्टिव्हेट करा"
+        android:backgroundTint="#0088FF"
+        android:textColor="#FFFFFF"
+        android:layout_marginBottom="24dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="📰 चालू घडामोडी व सायबर अलर्ट्स:"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textColor="#FFAA00"
+        android:layout_marginBottom="10dp"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <TextView
+            android:id="@+id/tvDailyScamNews"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#E0E0E0"
+            android:lineSpacingExtra="6dp"
+            android:textSize="15sp"/>
+    </ScrollView>
+
+</LinearLayout>
