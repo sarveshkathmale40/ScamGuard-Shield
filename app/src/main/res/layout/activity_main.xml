@@ -3,55 +3,207 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="20dp"
-    android:background="#121212">
+    android:background="#0A0E1A"
+    android:padding="16dp">
 
+    <!-- Top App Title -->
     <TextView
+        android:id="@+id/tvTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="🛡️ ScamGuard Shield"
+        android:textColor="#00E676"
         android:textSize="24sp"
         android:textStyle="bold"
-        android:textColor="#00FF66"
-        android:layout_gravity="center"
-        android:layout_marginBottom="16dp"/>
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="10dp" />
 
     <TextView
-        android:layout_width="match_parent"
+        android:id="@+id/tvStatus"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="बॅकग्राउंड प्रोटेक्शन: सक्रिय (Active)"
-        android:textColor="#FFFFFF"
-        android:textSize="16sp"
-        android:layout_marginBottom="20dp"/>
+        android:text="● Background Shield: MONITORING ACTIVE"
+        android:textColor="#69F0AE"
+        android:textSize="13sp"
+        android:textStyle="bold"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="4dp" />
 
+    <!-- Action Button -->
     <Button
         android:id="@+id/btnPermissions"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="🛡️ सर्व सिक्युरिटी परवानग्या ॲक्टिव्हेट करा"
-        android:backgroundTint="#0088FF"
+        android:text="🔒 Activate Real-time Protection"
         android:textColor="#FFFFFF"
-        android:layout_marginBottom="24dp"/>
+        android:textStyle="bold"
+        android:backgroundTint="#1565C0"
+        android:layout_marginTop="16dp"
+        android:padding="12dp" />
 
+    <!-- Feed Header -->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="📰 चालू घडामोडी व सायबर अलर्ट्स:"
-        android:textSize="18sp"
+        android:text="🚨 Active Cyber Threats &amp; Safety Advisories:"
+        android:textColor="#FFD54F"
+        android:textSize="16sp"
         android:textStyle="bold"
-        android:textColor="#FFAA00"
-        android:layout_marginBottom="10dp"/>
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="8dp" />
 
+    <!-- Scrollable Feed -->
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <TextView
-            android:id="@+id/tvDailyScamNews"
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="#E0E0E0"
-            android:lineSpacingExtra="6dp"
-            android:textSize="15sp"/>
+            android:orientation="vertical"
+            android:paddingBottom="24dp">
+
+            <!-- Card 1: Digital Arrest -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="#161C2E"
+                android:padding="14dp"
+                android:layout_marginBottom="12dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="1. 👮 Fake Police / Digital Arrest Video Calls"
+                    android:textColor="#FF5252"
+                    android:textStyle="bold"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Threat: Fraudsters impersonating CBI, ED, or Customs officers via WhatsApp/Skype video calls claiming illegal parcels and demanding urgent bank transfers."
+                    android:textColor="#B0BEC5"
+                    android:textSize="13sp"
+                    android:layout_marginTop="6dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="🛡️ Safety Tip: Indian law enforcement agencies never interrogate or demand payments over video calls. Hang up and report to cybercrime.gov.in or dial 1930."
+                    android:textColor="#69F0AE"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    android:layout_marginTop="6dp" />
+            </LinearLayout>
+
+            <!-- Card 2: AI Voice Cloning -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="#161C2E"
+                android:padding="14dp"
+                android:layout_marginBottom="12dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="2. 🎙️ AI Voice Clone &amp; Emergency Impersonation"
+                    android:textColor="#FF5252"
+                    android:textStyle="bold"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Threat: Scammers clone friends or relatives' voices using AI audio tools to create fake accident/hospital emergencies demanding immediate UPI transfers."
+                    android:textColor="#B0BEC5"
+                    android:textSize="13sp"
+                    android:layout_marginTop="6dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="🛡️ Safety Tip: Always disconnect the call and dial the person directly on their primary phone number to verify before transferring any funds."
+                    android:textColor="#69F0AE"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    android:layout_marginTop="6dp" />
+            </LinearLayout>
+
+            <!-- Card 3: Fake Electricity Bill & WhatsApp APKs -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="#161C2E"
+                android:padding="14dp"
+                android:layout_marginBottom="12dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="3. ⚡ Electricity Disconnection &amp; Bank APK Fraud"
+                    android:textColor="#FF5252"
+                    android:textStyle="bold"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Threat: SMS claiming 'Power will be disconnected tonight' or WhatsApp files named 'SBI_Reward.apk' / 'Mahadiscom_Update.apk' that steal banking OTPs."
+                    android:textColor="#B0BEC5"
+                    android:textSize="13sp"
+                    android:layout_marginTop="6dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="🛡️ Safety Tip: Never download .apk files shared via chat apps. Always pay bills through official utility apps or authorized websites."
+                    android:textColor="#69F0AE"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    android:layout_marginTop="6dp" />
+            </LinearLayout>
+
+            <!-- Card 4: Telegram Work From Home -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="#161C2E"
+                android:padding="14dp"
+                android:layout_marginBottom="12dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="4. 💼 Part-Time Task &amp; Crypto Investment Scam"
+                    android:textColor="#FF5252"
+                    android:textStyle="bold"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Threat: Offering ₹3,000-₹5,000 daily for liking YouTube videos or rating Google Maps locations, followed by demands for crypto deposits."
+                    android:textColor="#B0BEC5"
+                    android:textSize="13sp"
+                    android:layout_marginTop="6dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="🛡️ Safety Tip: Legitimate enterprises never ask for security deposits for jobs. Block and report unknown Telegram/WhatsApp job offers."
+                    android:textColor="#69F0AE"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    android:layout_marginTop="6dp" />
+            </LinearLayout>
+
+        </LinearLayout>
     </ScrollView>
 
 </LinearLayout>
