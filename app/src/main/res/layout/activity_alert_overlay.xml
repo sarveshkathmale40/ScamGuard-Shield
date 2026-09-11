@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="#B71C1C"
+    android:padding="24dp"
+    android:gravity="center">
+
+    <TextView
+        android:id="@+id/tvAlertTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="🚨 CRITICAL SCAM ALERT DETECTED 🚨"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:gravity="center" />
+
+    <TextView
+        android:id="@+id/tvAlertMessage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Suspicious cyber scam or unauthorized phishing pattern detected in incoming message. Do not tap any link or share verification codes."
+        android:textColor="#FFF9C4"
+        android:textSize="14sp"
+        android:layout_marginTop="14dp"
+        android:gravity="center" />
+
+    <Button
+        android:id="@+id/btnDismiss"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Dismiss Alert"
+        android:textColor="#B71C1C"
+        android:backgroundTint="#FFFFFF"
+        android:textStyle="bold"
+        android:layout_marginTop="20dp" />
+
+</LinearLayout>
