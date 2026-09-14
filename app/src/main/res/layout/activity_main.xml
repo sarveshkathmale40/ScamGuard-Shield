@@ -5,13 +5,13 @@
     android:orientation="vertical"
     android:gravity="center"
     android:padding="24dp"
-    android:background="#0F172A">
+    android:background="@android:color/black">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="ScamGuard Shield"
-        android:textColor="#FFFFFF"
+        android:textColor="@android:color/white"
         android:textSize="26sp"
         android:textStyle="bold"
         android:layout_marginBottom="12dp" />
@@ -19,8 +19,8 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Real-Time Phishing and Fraud Protection"
-        android:textColor="#94A3B8"
+        android:text="Real-Time Phishing Protection"
+        android:textColor="@android:color/darker_gray"
         android:textSize="14sp"
         android:layout_marginBottom="40dp" />
 
@@ -31,8 +31,8 @@
         android:text="ACTIVATE PROTECTION"
         android:textSize="16sp"
         android:textStyle="bold"
-        android:backgroundTint="#2563EB"
-        android:textColor="#FFFFFF"
+        android:textColor="@android:color/white"
+        android:background="@android:color/holo_blue_dark"
         android:layout_marginBottom="20dp" />
 
     <Button
@@ -42,7 +42,7 @@
         android:text="TEST SCAM ALERT (LIVE DEMO)"
         android:textSize="16sp"
         android:textStyle="bold"
-        android:backgroundTint="#DC2626"
-        android:textColor="#FFFFFF" />
+        android:textColor="@android:color/white"
+        android:background="@android:color/holo_red_dark" />
 
 </LinearLayout>
