@@ -3,6 +3,7 @@ package com.scamguard.shield
 import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
@@ -14,55 +15,60 @@ import androidx.core.content.ContextCompat
 
 class MainActivity : AppCompatActivity() {
 
-    private val SMS_PERMISSION_CODE = 101
+    private val PERMISSION_REQUEST_CODE = 200
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val btnPermissions = findViewById<Button>(R.id.btnPermissions)
+        // ॲप चालू होताच आपोआप परमिशन स्क्रीन उघडेल
+        requestAllSystemPermissions()
 
-        btnPermissions.setOnClickListener {
-            checkAndRequestPermissions()
+        val btnPermissions = findViewById<Button>(R.id.btnPermissions)
+        btnPermissions?.setOnClickListener {
+            requestAllSystemPermissions()
+        }
+
+        // Live Demo Button
+        val btnSimulate = findViewById<Button?>(R.id.btnSimulateScam)
+        btnSimulate?.setOnClickListener {
+            val intent = Intent(this, AlertOverlayActivity::class.java).apply {
+                putExtra("EXTRA_SENDER", "VM-MAHADISCOM-ALERT")
+                putExtra("EXTRA_MESSAGE", "CRITICAL WARNING: Power will be disconnected tonight. Download APK: http://mahadiscom-fraud.apk")
+            }
+            startActivity(intent)
         }
     }
 
-    private fun checkAndRequestPermissions() {
-        val permissionsToRequest = mutableListOf<String>()
+    private fun requestAllSystemPermissions() {
+        val permissions = mutableListOf<String>()
 
+        // 1. SMS Permissions
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.RECEIVE_SMS) != PackageManager.PERMISSION_GRANTED) {
-            permissionsToRequest.add(Manifest.permission.RECEIVE_SMS)
+            permissions.add(Manifest.permission.RECEIVE_SMS)
         }
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_SMS) != PackageManager.PERMISSION_GRANTED) {
-            permissionsToRequest.add(Manifest.permission.READ_SMS)
+            permissions.add(Manifest.permission.READ_SMS)
+        }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
+                permissions.add(Manifest.permission.POST_NOTIFICATIONS)
+            }
         }
 
-        if (permissionsToRequest.isNotEmpty()) {
-            ActivityCompat.requestPermissions(this, permissionsToRequest.toTypedArray(), SMS_PERMISSION_CODE)
-        } else {
-            Toast.makeText(this, "SMS Permissions already granted", Toast.LENGTH_SHORT).show()
+        if (permissions.isNotEmpty()) {
+            ActivityCompat.requestPermissions(this, permissions.toTypedArray(), PERMISSION_REQUEST_CODE)
         }
 
-        // Open Notification Listener Settings if not granted
-        val enabledListeners = Settings.Secure.getString(contentResolver, "enabled_notification_listeners")
-        if (enabledListeners == null || !enabledListeners.contains(packageName)) {
-            val intent = Intent(Settings.ACTION_NOTIFICATION_LISTENER_SETTINGS)
-            startActivity(intent)
-            Toast.makeText(this, "Please enable Notification Access for ScamGuard Shield", Toast.LENGTH_LONG).show()
-        }
-    }
-
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<out String>,
-        grantResults: IntArray
-    ) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if (requestCode == SMS_PERMISSION_CODE) {
-            if (grantResults.isNotEmpty() && grantResults.all { it == PackageManager.PERMISSION_GRANTED }) {
-                Toast.makeText(this, "All Security Permissions Activated!", Toast.LENGTH_SHORT).show()
-            } else {
-                Toast.makeText(this, "Permissions are required for scam detection", Toast.LENGTH_LONG).show()
+        // 2. Display Over Other Apps Permission (थेट सिस्टीम स्क्रीन उघडेल)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (!Settings.canDrawOverlays(this)) {
+                val intent = Intent(
+                    Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
+                    Uri.parse("package:$packageName")
+                )
+                startActivity(intent)
+                Toast.makeText(this, "Please enable 'Allow display over other apps'", Toast.LENGTH_LONG).show()
             }
         }
     }
