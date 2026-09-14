@@ -10,7 +10,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="🛡️ ScamGuard Shield"
+        android:text="ScamGuard Shield"
         android:textColor="#FFFFFF"
         android:textSize="26sp"
         android:textStyle="bold"
@@ -19,12 +19,11 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Real-Time Phishing &amp; Fraud Protection"
+        android:text="Real-Time Phishing and Fraud Protection"
         android:textColor="#94A3B8"
         android:textSize="14sp"
         android:layout_marginBottom="40dp" />
 
-    <!-- Button 1: Permissions -->
     <Button
         android:id="@+id/btnPermissions"
         android:layout_width="match_parent"
@@ -36,12 +35,11 @@
         android:textColor="#FFFFFF"
         android:layout_marginBottom="20dp" />
 
-    <!-- Button 2: Live Demo Button -->
     <Button
         android:id="@+id/btnSimulateScam"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:text="🚨 TEST SCAM ALERT (LIVE DEMO)"
+        android:text="TEST SCAM ALERT (LIVE DEMO)"
         android:textSize="16sp"
         android:textStyle="bold"
         android:backgroundTint="#DC2626"
