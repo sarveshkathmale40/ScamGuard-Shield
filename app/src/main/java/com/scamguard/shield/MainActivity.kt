@@ -21,15 +21,13 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        // ॲप चालू होताच आपोआप परमिशन स्क्रीन उघडेल
         requestAllSystemPermissions()
 
-        val btnPermissions = findViewById<Button>(R.id.btnPermissions)
+        val btnPermissions = findViewById<Button?>(R.id.btnPermissions)
         btnPermissions?.setOnClickListener {
             requestAllSystemPermissions()
         }
 
-        // Live Demo Button
         val btnSimulate = findViewById<Button?>(R.id.btnSimulateScam)
         btnSimulate?.setOnClickListener {
             val intent = Intent(this, AlertOverlayActivity::class.java).apply {
@@ -43,7 +41,6 @@ class MainActivity : AppCompatActivity() {
     private fun requestAllSystemPermissions() {
         val permissions = mutableListOf<String>()
 
-        // 1. SMS Permissions
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.RECEIVE_SMS) != PackageManager.PERMISSION_GRANTED) {
             permissions.add(Manifest.permission.RECEIVE_SMS)
         }
@@ -60,15 +57,17 @@ class MainActivity : AppCompatActivity() {
             ActivityCompat.requestPermissions(this, permissions.toTypedArray(), PERMISSION_REQUEST_CODE)
         }
 
-        // 2. Display Over Other Apps Permission (थेट सिस्टीम स्क्रीन उघडेल)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (!Settings.canDrawOverlays(this)) {
-                val intent = Intent(
-                    Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
-                    Uri.parse("package:$packageName")
-                )
-                startActivity(intent)
-                Toast.makeText(this, "Please enable 'Allow display over other apps'", Toast.LENGTH_LONG).show()
+                try {
+                    val intent = Intent(
+                        Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
+                        Uri.parse("package:$packageName")
+                    )
+                    startActivity(intent)
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                }
             }
         }
     }
