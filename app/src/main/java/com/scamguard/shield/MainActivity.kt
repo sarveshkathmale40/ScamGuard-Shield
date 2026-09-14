@@ -8,7 +8,6 @@ import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
 import android.widget.Button
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -39,7 +38,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun requestAllSystemPermissions() {
-        val permissions = mutableListOf<String>()
+        val permissions = ArrayList<String>()
 
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.RECEIVE_SMS) != PackageManager.PERMISSION_GRANTED) {
             permissions.add(Manifest.permission.RECEIVE_SMS)
@@ -47,7 +46,7 @@ class MainActivity : AppCompatActivity() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_SMS) != PackageManager.PERMISSION_GRANTED) {
             permissions.add(Manifest.permission.READ_SMS)
         }
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+        if (Build.VERSION.SDK_INT >= 33) {
             if (ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
                 permissions.add(Manifest.permission.POST_NOTIFICATIONS)
             }
