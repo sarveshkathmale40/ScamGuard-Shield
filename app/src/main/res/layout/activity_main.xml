@@ -12,17 +12,17 @@
         android:layout_height="wrap_content"
         android:text="ScamGuard Shield"
         android:textColor="@android:color/white"
-        android:textSize="26sp"
+        android:textSize="24sp"
         android:textStyle="bold"
         android:layout_marginBottom="12dp" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Real-Time Phishing Protection"
+        android:text="SMS Phishing Detection Active"
         android:textColor="@android:color/darker_gray"
         android:textSize="14sp"
-        android:layout_marginBottom="40dp" />
+        android:layout_marginBottom="36dp" />
 
     <Button
         android:id="@+id/btnPermissions"
