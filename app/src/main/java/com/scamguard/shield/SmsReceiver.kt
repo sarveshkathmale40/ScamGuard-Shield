@@ -6,6 +6,7 @@ import android.app.PendingIntent
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
+import android.media.RingtoneManager
 import android.os.Build
 import android.provider.Telephony
 import androidx.core.app.NotificationCompat
@@ -28,7 +29,6 @@ class SmsReceiver : BroadcastReceiver() {
             val fullText = bodyBuilder.toString()
             val lowerText = fullText.lowercase()
 
-            // फ्रॉड लिंक्स आणि कीवर्ड्स तपासणे
             if (lowerText.contains("http://") || lowerText.contains("https://") ||
                 lowerText.contains("www.") || lowerText.contains(".com") ||
                 lowerText.contains(".in") || lowerText.contains(".apk") ||
@@ -37,20 +37,22 @@ class SmsReceiver : BroadcastReceiver() {
                 lowerText.contains("urgent") || lowerText.contains("click")) {
 
                 val overlayIntent = Intent(context, AlertOverlayActivity::class.java).apply {
-                    addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
+                    addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or 
+                             Intent.FLAG_ACTIVITY_CLEAR_TOP or 
+                             Intent.FLAG_ACTIVITY_SINGLE_TOP or
+                             Intent.FLAG_ACTIVITY_REORDER_TO_FRONT)
                     putExtra("EXTRA_SENDER", sender)
                     putExtra("EXTRA_MESSAGE", fullText)
                 }
 
-                // बॅकग्राउंडमधून स्क्रीन थेट उघडण्यासाठी FullScreen PendingIntent
                 val pendingIntent = PendingIntent.getActivity(
                     context,
-                    0,
+                    System.currentTimeMillis().toInt(),
                     overlayIntent,
-                    PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+                    PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_MUTABLE
                 )
 
-                val channelId = "scam_alert_channel"
+                val channelId = "scam_alert_channel_v2"
                 val notificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -62,22 +64,26 @@ class SmsReceiver : BroadcastReceiver() {
                         description = "Triggers Full Screen Alert on Phishing SMS"
                         setBypassDnd(true)
                         enableVibration(true)
+                        lockscreenVisibility = NotificationCompat.VISIBILITY_PUBLIC
                     }
                     notificationManager.createNotificationChannel(channel)
                 }
 
+                val defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
                 val notificationBuilder = NotificationCompat.Builder(context, channelId)
                     .setSmallIcon(android.R.drawable.ic_dialog_alert)
                     .setContentTitle("CRITICAL SCAM DETECTED!")
                     .setContentText("Malicious link detected from $sender")
                     .setPriority(NotificationCompat.PRIORITY_MAX)
                     .setCategory(NotificationCompat.CATEGORY_ALARM)
+                    .setSound(defaultSoundUri)
                     .setFullScreenIntent(pendingIntent, true)
+                    .setContentIntent(pendingIntent)
+                    .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
                     .setAutoCancel(true)
 
                 notificationManager.notify(1001, notificationBuilder.build())
 
-                // थेट उघडण्याचा प्रयत्न
                 try {
                     context.startActivity(overlayIntent)
                 } catch (e: Exception) {
